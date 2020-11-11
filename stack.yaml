@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  web:
+    image: php:7.3-apache
+    depends_on:
+      - db
+    volumes:
+      - /opt/docker/nfs/html:/var/www/html
+    ports:
+      - 80:80
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: prova_db
+      MYSQL_USER: usuari
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      - /opt/docker/nfs/mysql:/var/lib/mysql
+
